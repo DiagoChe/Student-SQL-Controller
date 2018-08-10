@@ -22,7 +22,6 @@ public class StudentDao {
      * 
      * @param jdbcTemplate
      *            返回值类型： void
-     * @author janinus
      */
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
@@ -32,7 +31,6 @@ public class StudentDao {
      * 查询所有学生
      * 
      * @return 返回值类型： List<Student>
-     * @author janinus
      */
     public List<Student> queryAll() {
     String sql = "select id,name,javaScore,htmlScore,cssScore from student";
@@ -45,7 +43,6 @@ public class StudentDao {
      * 
      * @param name
      * @return 返回值类型： List<Student>
-     * @author janinus
      */
     public List<Student> queryByName(String name) {
     String sql = "select id,name,javaScore,htmlScore,cssScore from student where name like '%" + name + "%'";
@@ -57,14 +54,13 @@ public class StudentDao {
      * 
      * @param student
      * @return 返回值类型： boolean
-     * @author janinus
      */
     public boolean addStu(Student student) {
-    String sql = "insert into student(id,name,javaScore,htmlScore,cssScore) values(0,?,?,?,?)";
+    String sql = "insert into student(id,name,javaScore,htmlScore,cssScore) values(?,?,?,?,?)";
     return jdbcTemplate.update(sql,
-        new Object[] { student.getName(), student.getJavaScore(), student.getHtmlScore(),
+        new Object[] {student.getId(), student.getName(), student.getJavaScore(), student.getHtmlScore(),
             student.getCssScore() },
-        new int[] { Types.VARCHAR, Types.DOUBLE, Types.DOUBLE, Types.DOUBLE }) == 1;
+        new int[] {Types.INTEGER, Types.VARCHAR, Types.DOUBLE, Types.DOUBLE, Types.DOUBLE }) == 1;
     }
 
     /**
@@ -72,7 +68,6 @@ public class StudentDao {
      * 
      * @param id
      * @return 返回值类型： boolean
-     * @author janinus
      */
     public boolean deleteStu(Integer id) {
     String sql = "delete from student where id = ?";
@@ -84,10 +79,9 @@ public class StudentDao {
      * 
      * @param student
      * @return 返回值类型： boolean
-     * @author janinus
      */
     public boolean updateStu(Student student) {
-    String sql = "update student set name=? ,javaScore=?,htmlScore = ? ,cssScore = ? where id = ?";
+    String sql = "update student set name=? ,javaScore=?,htmlScore = ? ,cssScore = ? ,where id = ?";
     Object stuObj[] = new Object[] { student.getName(), student.getJavaScore(), student.getHtmlScore(),
         student.getCssScore(), student.getId() };
     return jdbcTemplate.update(sql, stuObj) == 1;
@@ -98,7 +92,6 @@ public class StudentDao {
      * 
      * @param num
      * @return 返回值类型： List<Student>
-     * @author janinus
      */
     public List<Student> topNum(int num) {
     String sql = "select id,name,javaScore+htmlScore+cssScore from student order by javaScore+htmlScore+cssScore desc ,name asc limit ?";
@@ -121,9 +114,6 @@ public class StudentDao {
      * StudentMapper数据库映射
      * 
      * @ClassName StudentMapper
-     * @author janinus
-     * @date 2017年6月27日
-     * @Version V1.0
      */
 
     class StudentMapper implements RowMapper<Student> {

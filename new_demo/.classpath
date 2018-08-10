@@ -98,5 +98,6 @@
 	<classpathentry kind="lib" path="C:/Users/sr162/Downloads/apache-tomcat-8.5.32/lib/tomcat-websocket.jar"/>
 	<classpathentry kind="lib" path="C:/Users/sr162/Downloads/apache-tomcat-8.5.32/lib/websocket-api.jar"/>
 	<classpathentry kind="lib" path="C:/Users/sr162/Downloads/jstl.jar和standard-1.1.2.jar/jstl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sr162/Downloads/jstl.jar和standard-1.1.2.jar/standard-1.1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

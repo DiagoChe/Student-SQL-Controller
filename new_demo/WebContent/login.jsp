@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 align="center"><a href="/all">进入主页</a></h1>
+<h1 align="center"><a href="all">进入主页</a></h1>
 </body>
 </html>

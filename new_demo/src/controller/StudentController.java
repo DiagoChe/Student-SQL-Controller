@@ -13,13 +13,13 @@ import dao.StudentDao;
 public class StudentController {
 	/**
      * 
-     * 从数据库中获取全部学生信息，将数据返回给主页index,jsp
+     * 从数据库中获取全部学生信息，将数据返回给主页index.jsp
      * 
      * @param model
      * @return 返回值类型： String
-     * @author janinus
      */
-    @RequestMapping(value = "/all")
+    @SuppressWarnings("resource")
+	@RequestMapping(value = "/all")
     public String queryAll(Model model) {
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     //从ioc容器中获取dao
@@ -35,9 +35,9 @@ public class StudentController {
      * @param name
      * @param model
      * @return 返回值类型： String
-     * @author janinus
      */
-    @RequestMapping(value = "/queryByName")
+    @SuppressWarnings("resource")
+	@RequestMapping(value = "/queryByName")
     public String queryByName(String name, Model model) {
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     //从ioc容器中获取dao
@@ -55,23 +55,25 @@ public class StudentController {
      * @param cssScore
      * @param model
      * @return 返回值类型： String
-     * @author janinus
+     * @param id 
      */
-    @RequestMapping(value = "/add")
-    public String addStu(String name, String javaScore, String htmlScore, String cssScore, Model model) {
+    @SuppressWarnings("resource")
+	@RequestMapping(value = "/add")
+    public String addStu(String name, String javaScore, String htmlScore, String cssScore, Model model, Integer id) {
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     StudentDao dao = (StudentDao) context.getBean("dao");
     Student student = new Student();
+    student.setId(id);
     student.setName(name);
     student.setJavaScore(Double.parseDouble(javaScore));
     student.setHtmlScore(Double.parseDouble(htmlScore));
     student.setCssScore(Double.parseDouble(cssScore));
     boolean result = dao.addStu(student);
-    if (result)
-        model.addAttribute("msg", "<script>alert('添加成功！')</script>");
-    else
-        model.addAttribute("msg", "<script>alert('添加成功！')</script>");
-    return "all";
+    if (result){
+        model.addAttribute("msg", "<script>alert('添加成功！')</script>");}
+    else{
+        model.addAttribute("msg", "<script>alert('添加失败！')</script>");}
+    return "/all";
     }
 
     /**
@@ -79,9 +81,9 @@ public class StudentController {
      * @param id
      * @param model
      * @return 返回值类型： String
-     * @author janinus
      */
-    @RequestMapping(value = "/deleteById")
+    @SuppressWarnings("resource")
+	@RequestMapping(value = "/deleteById")
     public String deleteById(String id, Model model) {
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     StudentDao dao = (StudentDao) context.getBean("dao");
@@ -89,7 +91,7 @@ public class StudentController {
     if (result)
         model.addAttribute("msg", "<script>alert('删除成功！')</script>");
     else
-        model.addAttribute("msg", "<script>alert('删除成功！')</script>");
+        model.addAttribute("msg", "<script>alert('删除失败！')</script>");
     return "all";
     }
 
@@ -102,9 +104,9 @@ public class StudentController {
      * @param cssScore
      * @param model
      * @return 返回值类型： String
-     * @author janinus
      */
-    @RequestMapping(value = "/update")
+    @SuppressWarnings("resource")
+	@RequestMapping(value = "/update")
     public String updateStu(String id, String name, String javaScore, String htmlScore, String cssScore, Model model) {
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     StudentDao dao = (StudentDao) context.getBean("dao");
@@ -126,7 +128,6 @@ public class StudentController {
      * 要弹出的页面消息
      * @param msg
      * @return 返回值类型： String
-     * @author janinus
      */
     public String msg(String msg) {
     return "<script>alert('" + msg + "')</script>";

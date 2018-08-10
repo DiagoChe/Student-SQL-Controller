@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" 
+           uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>学生管理</title>
+  <meta charset="UTF-8">
+  <title>学生管理</title>
 </head>
 <style type="text/css">
   body{
@@ -64,8 +68,11 @@
  
   }
  
- </style>
- <script src="http://code.jquery.com/jquery-latest.js"></script>
+ 
+ 
+ 
+</style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
   $(function(){
     $("#cancel").click(function(){
@@ -118,9 +125,8 @@
   }
  
 </script>
-
 <body>
-	${msg }
+${msg }
 <h1 align="center">学生管理</h1>
  
 <div id="all_comm" class="all" >
@@ -143,7 +149,7 @@
       <td id="java${student.id}">${student.javaScore }</td>
       <td id="html${student.id }">${student.htmlScore }</td>
       <td id="css${student.id}">${student.cssScore }</td>
-      <td ><a onclick="delete_stu(${student.id})">删除</a>|<a onclick="edit_stu(${student.id})">编辑</a></td>
+      <td ><a onclick="delete_stu(${student.id})" href="deleteById">删除</a>|<a onclick="edit_stu(${student.id})" href="update">编辑</a></td>
       </tr>
     </c:forEach>
  
@@ -162,10 +168,10 @@
       <td id="id${student.id }t">${student.id }</td>
       <td>${student.name }</td>
       <td id="name${student.id }t">${student.totalScore }</td>
-      </tr>x
+      </tr>
     </c:forEach>
     </table>
-  如不显示请：<a onclick="refush()" >点此刷新</a>
+  如不显示请：<a href="all" onclick="refush()" >点此刷新</a>
 </div>
 <div id="add_comm" class="all">
   <h2>查找学生</h2>
@@ -175,6 +181,7 @@
   </form>
   <h2 id="edit_title">添加学生</h2>
   <form action="add" method="post" >
+  <input type="text" placeholder="id" name="id"    />
   <input type="text" placeholder="学生姓名" name="name" />
   <input type="text" placeholder="java成绩" name="javaScore" />
   <input type="text" placeholder="html成绩" name="htmlScore" />
