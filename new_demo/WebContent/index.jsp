@@ -10,7 +10,7 @@
 <head>
   <meta charset="UTF-8">
   <title>学生管理</title>
-</head>
+
 <style type="text/css">
   body{
     text-align: center;
@@ -72,9 +72,11 @@
  
  
 </style>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" >
+
   $(function(){
+	
     $("#cancel").click(function(){
       $("#add_comm").fadeIn();
       $("#edit_comm").fadeOut();
@@ -84,7 +86,7 @@
   })
  
   function refush(){
-     window.location.href="all" rel="external nofollow" rel="external nofollow" ;
+     window.location.href="all" ;
   }
  
   function add_reg(){
@@ -106,7 +108,7 @@
   function delete_stu(id){
      var result = confirm("是否删除？");
      if(result)
-       window.location.href="deleteById?id=" rel="external nofollow" +id;
+       window.location.href="deleteById?id=" +id;
  
   }
   function edit_stu(id){
@@ -125,6 +127,7 @@
   }
  
 </script>
+</head>
 <body>
 ${msg }
 <h1 align="center">学生管理</h1>
@@ -149,7 +152,7 @@ ${msg }
       <td id="java${student.id}">${student.javaScore }</td>
       <td id="html${student.id }">${student.htmlScore }</td>
       <td id="css${student.id}">${student.cssScore }</td>
-      <td ><a onclick="delete_stu(${student.id})" href="deleteById">删除</a>|<a onclick="edit_stu(${student.id})" href="update">编辑</a></td>
+      <td ><a onclick="delete_stu('${student.id}')" href="#">删除</a>|<a onclick="edit_stu(${student.id})" href="#">编辑</a></td>
       </tr>
     </c:forEach>
  
@@ -202,4 +205,12 @@ ${msg }
   </form>
 </div>
 </body>
+<script type="text/javascript">
+function delete_stu(id){
+    var result = confirm("是否删除？");
+    if(result)
+      window.location.href="deleteById?id="+id;
+
+ }
+ </script>
 </html>

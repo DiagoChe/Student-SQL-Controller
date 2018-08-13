@@ -62,7 +62,7 @@ public class StudentDao {
             student.getCssScore() },
         new int[] {Types.INTEGER, Types.VARCHAR, Types.DOUBLE, Types.DOUBLE, Types.DOUBLE }) == 1;
     }
-
+    
     /**
      * 删除学生
      * 
@@ -81,7 +81,7 @@ public class StudentDao {
      * @return 返回值类型： boolean
      */
     public boolean updateStu(Student student) {
-    String sql = "update student set name=? ,javaScore=?,htmlScore = ? ,cssScore = ? ,where id = ?";
+    String sql = "update student set name=? ,javaScore=?,htmlScore = ? ,cssScore = ? where id = ?";
     Object stuObj[] = new Object[] { student.getName(), student.getJavaScore(), student.getHtmlScore(),
         student.getCssScore(), student.getId() };
     return jdbcTemplate.update(sql, stuObj) == 1;
